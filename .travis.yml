@@ -1,0 +1,57 @@
+language: node_js
+node_js:
+  - 13
+
+git:
+  depth: 25
+  quiet: true
+
+services:
+  - docker
+
+cache:
+  directories:
+  # We cache the SDK so we don't have to download it again on subsequent builds.
+  - $HOME/google-cloud-sdk
+
+env:
+  global:
+  # Do not prompt for user input when using any SDK methods.
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1 
+
+before_install:
+  - if [ ! -d $HOME/google-cloud-sdk/bin ]; then rm -rf $HOME/google-cloud-sdk;curl https://sdk.cloud.google.com | bash > /dev/null;fi  
+  # This line is critical. We setup the SDK to take precedence in our
+  # environment over the old SDK that is already on the machine.
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud components update kubectl
+  - gcloud version
+
+# Pre-testing installs
+install:
+  - echo "nothing needs to be installed"
+
+# Scripts to be run such as tests
+before_script:
+  - echo "no tests"
+
+script:
+  - kubectl version
+  - cd udagram-user-api
+  - docker --version # print the version for logging
+  - docker build -t udagram-user-api .
+  - docker tag udagram-user-api dilipagheda/udagram-user-api
+  - cd ..
+  - cd udagram-feed-api
+  - docker build -t udagram-feed-api .
+  - docker tag udagram-feed-api dilipagheda/udagram-feed-api
+  - cd ..
+  - cd udagram-frontend
+  - docker build -t udagram-frontend .
+  - docker tag udagram-frontend dilipagheda/udagram-frontend
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push dilipagheda/udagram-user-api
+  - docker push dilipagheda/udagram-feed-api
+  - docker push dilipagheda/udagram-frontend
