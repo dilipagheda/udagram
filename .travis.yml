@@ -40,3 +40,26 @@ before_script:
 script:
   - kubectl version
   - aws --version
+  - cd udagram-user-api
+  - docker --version # print the version for logging
+  - docker build -t udagram-user-api .
+  - docker tag udagram-user-api dilipagheda/udagram-user-api
+  - cd ..
+  - cd udagram-feed-api
+  - docker build -t udagram-feed-api .
+  - docker tag udagram-feed-api dilipagheda/udagram-feed-api
+  - cd ..
+  - cd udagram-frontend
+  - docker build -t udagram-frontend .
+  - docker tag udagram-frontend dilipagheda/udagram-frontend
+  - cd ..
+  - cd reverseproxy
+  - docker build -t simple-reverse-proxy .
+  - docker tag simple-reverse-proxy dilipagheda/simple-reverse-proxy
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push dilipagheda/udagram-user-api
+  - docker push dilipagheda/udagram-feed-api
+  - docker push dilipagheda/udagram-frontend
+  - docker push dilipagheda/simple-reverse-proxy
