@@ -28,10 +28,7 @@ before_install:
   - gcloud version
   - pip install --user awscli # install aws cli w/o sudo
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
-  - sudo cp /etc/kubernetes/admin.conf $HOME/
-  - sudo chown $(id -u):$(id -g) $HOME/admin.conf
-  - export KUBECONFIG=$HOME/admin.conf
-
+  
 # Pre-testing installs
 install:
   - echo "nothing needs to be installed"
