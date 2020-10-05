@@ -28,7 +28,8 @@ before_install:
   - gcloud version
   - pip install --user awscli # install aws cli w/o sudo
   - export PATH=$PATH:$HOME/.local/bin # put aws in the path
-  
+  - aws eks --region ap-southeast-2 update-kubeconfig --name Demo
+
 # Pre-testing installs
 install:
   - echo "nothing needs to be installed"
