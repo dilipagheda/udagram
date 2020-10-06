@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: feed-api
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: feed-api
-          image: dilipagheda/udagram-feed-api:latest
+          imagePullPolicy: Always
+          image: dilipagheda/udagram-feed-api
           ports:
             - containerPort: 8080
           env:
@@ -45,3 +46,13 @@ spec:
                 secretKeyRef:
                   name: udagramsecret
                   key: JWT_SECRET
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: udagramawssecret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: udagramawssecret
+                  key: AWS_SECRET_ACCESS_KEY

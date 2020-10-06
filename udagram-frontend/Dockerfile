@@ -9,6 +9,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
+RUN npm install -g @angular/cli
 RUN npm install
 
 # Install ionic
@@ -24,4 +25,5 @@ RUN ionic build
 EXPOSE 8100
 
 # Define the Docker image's behavior at runtime
-CMD ["ionic", "serve"]
+CMD ["ng","run","app:serve","--host=0.0.0.0","--port=8100","--disable-host-check"]
+

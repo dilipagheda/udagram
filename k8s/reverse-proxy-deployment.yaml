@@ -17,6 +17,7 @@ spec:
       containers:
       - image: dilipagheda/simple-reverse-proxy
         name: reverseproxy
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
 

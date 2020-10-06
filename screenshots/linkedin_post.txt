@@ -1,0 +1,27 @@
+Completed night time Project # Refactoring monolith application into microservices. 🔥 💥
+
+
+
+- Broke down single node.js app into microservices that allows user to upload image to S3 bucket via signed URL and stores meta data into AWS RDS (Postgres)
+
+- Dockerize Angular front end app and backend API microservices
+
+- Set up reverse proxy over backend API
+
+- Set up Kubernetes Cluster using Amazon's EKS. 
+
+- Set up Load balancer service
+
+- Built a CI/CD pipeline using Travis CI which builds and deploys to EKS each time a feature branch is merged with master
+
+
+
+Github Link: https://github.com/dilipagheda/udagram
+
+
+
+Demo as below. (Don't try to hit this as I took it down just now to avoid billing :-))
+
+
+
+#awscloud #kubernetes #udacity #nodejs #javascript #docker #awscertification #programming #computerscience 

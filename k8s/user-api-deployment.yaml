@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: user-api
-          image: dilipagheda/udagram-user-api:latest
+          imagePullPolicy: Always
+          image: dilipagheda/udagram-user-api
           ports:
             - containerPort: 8080
           env:

@@ -57,10 +57,24 @@ script:
   - cd reverseproxy
   - docker build -t simple-reverse-proxy .
   - docker tag simple-reverse-proxy dilipagheda/simple-reverse-proxy
-
-after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push dilipagheda/udagram-user-api
   - docker push dilipagheda/udagram-feed-api
   - docker push dilipagheda/udagram-frontend
-  - docker push dilipagheda/simple-reverse-proxy
+  - docker push dilipagheda/simple-reverse-proxy  
+  - cd ..
+  - cd k8s
+  - kubectl apply -f .
+  - kubectl get pods
+  - kubectl set image deployments/feed-api-deployment feed-api=dilipagheda/udagram-feed-api
+  - kubectl set image deployments/feed-api-deployment feed-api=dilipagheda/udagram-feed-api:latest
+  - kubectl set image deployments/frontend-deployment frontend=dilipagheda/udagram-frontend
+  - kubectl set image deployments/frontend-deployment frontend=dilipagheda/udagram-frontend:latest
+  - kubectl set image deployments/user-api-deployment user-api=dilipagheda/udagram-user-api
+  - kubectl set image deployments/user-api-deployment user-api=dilipagheda/udagram-user-api:latest
+  - kubectl set image deployments/reverseproxy reverseproxy=dilipagheda/simple-reverse-proxy
+  - kubectl set image deployments/reverseproxy reverseproxy=dilipagheda/simple-reverse-proxy:latest
+  - kubectl set image deployments/feed-api-deployment feed-api=dilipagheda/udagram-feed-api
+  - kubectl set image deployments/feed-api-deployment feed-api=dilipagheda/udagram-feed-api:latest
+  - kubectl get services
+  - kubectl get deployments

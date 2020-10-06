@@ -1,10 +1,13 @@
-# Udagram Image Filtering Application
+# Udagram - Instagram like App
 
 Udagram is a simple cloud application developed alongside the Udacity Cloud Engineering Nanodegree. It allows users to register and log into a web client, post photos to the feed, and process photos using an image filtering microservice.
 
 The project is split into two parts:
 1. Frontend - Angular web application built with Ionic Framework
 2. Backend RESTful API - Node-Express application
+
+## Deployment
+This project is deployed on AWS - Kubernetes Cluster using Docker containers. Automated CI/CD pipeline is built using Travis CI.
 
 ## Getting Started
 > _tip_: it's recommended that you start with getting the backend API running since the frontend web application depends on the API.
@@ -72,3 +75,29 @@ Create an AWS S3 bucket. Set the config values for environment variables prefixe
     npm audit fix
     ```
 5. In `set_env.sh`, environment variables are set with `export $VAR=value`. Setting it this way is not permanent; every time you open a new terminal, you will have to run `set_env.sh` to reconfigure your environment variables. To verify if your environment variable is set, you can check the variable with a command like `echo $POSTGRES_USERNAME`.
+
+## Screenshots
+
+### Docker Hub Images
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/dockerhub_images.PNG)
+
+### Travis CI Build Passing
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/travis_ci_build_passing.PNG)
+
+### Kubectl - Command output showing K8s Cluster, Pod and Services
+
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/kubectl_commands_1.PNG)
+
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/kubectl_commands_2.PNG)
+
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/kubectl_commands_3.PNG)
+
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/kubectl_commands_4.PNG)
+
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/kubectl_commands_5.PNG)
+
+## Demo
+
+![](https://github.com/dilipagheda/udagram/blob/master/screenshots/demo.gif)
+
+
